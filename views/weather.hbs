@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@200&display=swap" rel="stylesheet">
+    <style>
+        {{!-- body or .footer do sbme --}}
+        body{
+            display: flex;
+            min-height: 100vh;
+            flex-direction: column;
+            font-weight: 300;
+            font-size: larger;
+            font-family: 'Montserrat','Courier New', Courier, monospace;
+        }
+        .footer{
+            margin-top: auto;
+        }
+        .wmaindiv{
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+            width: 100%;
+        
+        }
+        .w-text{
+            padding: 10px;
+            margin-top: 80px;
+            display: flex;
+            flex-direction: row;
+            width: 35%;
+        }
+        .w-text input{
+            outline: 0;
+            border: 0;
+            font-size: 24px;
+            width: 100%;
+            background-color: aqua;
+            margin: 0 5px;
+            padding: 8px;
+            border-radius: 5px;
+        }
+        .w-text button{
+              cursor: pointer;
+            outline: 0;
+            border: 0;
+            border-radius: 5px;
+            font-size: 2rem;
+            font-weight: 300;
+            background-color:#019f55;
+            color: #fff;
+            padding: 10px 18px;
+        }
+        .w-output{
+            margin: 30px;
+            width: 30%;
+            height: 400px;
+            background-color: cadetblue;
+            border-radius: 10px;
+        }
+        .w-output p{
+            font-size: 2.5rem;
+            padding: 10px;
+        }
+        .date{
+            padding: 10px;
+            display: flex;
+            justify-content: space-between;
+        }
+        .date span{
+            margin: 5px;
+            font-size: 2.5rem;
+        }
+        #city{
+            font-size: 2.5rem;
+            margin: 20px 0;
+        }
+        #tempra{
+            font-size: 3rem;
+            margin: 20px 0;
+        }
+        .changediv{
+            visibility: hidden;
+        }
+    </style>
+</head>
+<body>
+    {{>nav}}
+    <div class="wmaindiv">
+        <div class="w-text">
+            <input type="text" id="text">
+            <button id="btncl">Search</button>
+        </div>
+        <div class="w-output">
+            <div class="date">
+                <span id="day">Tuesday</span>
+                <span id="datemonth">5 Oct</span>
+            </div>
+            <div id="city">Get Output Here</div>
+            <div id="tempra" class="changediv">&deg;C</div>
+        </div>
+    </div>
+    {{>footer}}
+    <script>
+
+        const myfun = async () =>{
+            const text = document.getElementById('text').value;
+            const tempop = document.getElementById('city');
+            const temprature = document.getElementById('tempra');
+            if(text===''){
+                tempop.innerHTML='Please Write The City Name Before Search';
+                console.log('text is empty hinding')
+                temprature.style.visibility='hidden';
+            }else{
+                try{
+                    const url = `https://api.openweathermap.org/data/2.5/weather?q=${text}&appid=e4c874d444d6b483930c61314c651319`;
+                    const responce = await fetch(url);
+                    const data = await responce.json();
+                    const arrdata = [data];
+                    tempop.innerHTML = `${arrdata[0].name}, ${arrdata[0].sys.country}`;
+                    temprature.style.visibility='visible';
+                    temprature.innerHTML=`${Math.round(arrdata[0].main.temp-273.15)}&deg;C`;
+                }catch{
+                tempop.innerHTML='Enter City Name Properly';
+                }
+            }
+        }
+        const botn = document.getElementById('btncl');
+        botn.addEventListener('click',myfun);
+
+
+
+        const days = ['Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday']
+        const months = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul","Aug", "Sep", "Oct", "Nov", "Dec"];
+        const fulldate = new Date();
+        const date = fulldate.getDate();
+        const day = days[fulldate.getDay()];
+        const month = months[fulldate.getMonth()];
+
+        const day_to_change = document.getElementById('day');
+        day_to_change.innerHTML = day;
+        const date_month = document.getElementById('datemonth');
+        date_month.innerHTML = `${date} ${month}`
+        
+    </script>
+</body>
+</html>

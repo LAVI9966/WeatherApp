@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@200&display=swap" rel="stylesheet">
+    <style>
+        body{
+            display: flex;
+            min-height: 100vh;
+            flex-direction: column;
+            font-weight: 300;
+            font-size: larger;
+            font-family: 'Montserrat','Courier New', Courier, monospace;
+        }
+        .footer{
+            margin-top: auto;
+        }
+        .content{
+            display: flex;
+            flex-direction: row;
+            width: 100%;
+            margin: auto;
+        }
+        .incontent{
+            margin: auto;
+        }
+        .imgg{
+            height: 100px;
+            width: 100px;
+            background-color: red;
+        }
+        .text p,h1,button{
+            margin: 10px 0;
+            padding: 5px 5px;
+        }
+        .text button{
+            cursor: pointer;
+            outline: 0;
+            border: 0;
+            border-radius: 5px;
+            font-size: 22px;
+            font-weight: 300;
+            background-color:#019f55;
+            color: #fff;
+            padding: 10px 18px;
+        }
+    </style>
+</head>
+<body>
+   {{>nav}}
+    <div class="content">
+        <div class="incontent text">
+            <p>Welcome to Weather app</p>
+            <h1>Get The Latest Weather info Of Your <br> City</h1>
+            <button onclick="hreffun('/weather')">Check Now</button>
+        </div>
+        <div class="incontent">
+            <div class="imgg"></div>
+        </div>
+    </div>
+   {{>footer}}
+   <script>
+    const hreffun = (url) =>{
+        window.location.href=url;
+    }
+   </script>
+</body>
+</html>
