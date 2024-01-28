@@ -3,8 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>WeatherApp</title>
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@200&display=swap" rel="stylesheet">
+    <link rel="icon" href="./img/favicon.png" style="color: white;" type="image/png">
+
     <style>
         body{
             display: flex;
@@ -26,10 +28,13 @@
             justify-content: space-evenly;
         }
         .imgs{
-            width:100px;
-            height:100px;
             margin: auto;
-            background-color: red;
+        }
+        .imgs img{
+            height: 500px;
+            width: 300px;
+            border-radius: 5px;
+            border: 2px solid yellowgreen;
         }
         .a-text{
             font-weight: 300;
@@ -73,6 +78,7 @@
     {{>nav}}
     <div class="a-maincon">
         <div class="imgs">
+            <img src="./img/img.jpg" alt="">
         </div>
         <div class="a-text">
             <p>
